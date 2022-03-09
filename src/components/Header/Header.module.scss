@@ -1,0 +1,57 @@
+$pimary: hsl(26, 100%, 55%);
+@mixin column {
+    display: flex;
+    align-items: center;
+}
+
+.Nav{
+    border-bottom: 2px solid hsla(220, 14%, 75%, 0.39);
+    .column {
+        @include column();
+    }
+    .icons {
+        @include column();
+        column-gap: 45px;
+        .cart {
+            cursor: pointer;
+        }
+        .avatar {
+            display: flex;
+            border-radius: 50px;
+            border: 2px solid hsla(26, 100%, 55%, 0);
+            margin: 0;
+            padding: 0;
+            &:hover {
+                border: 2px solid $pimary;
+            }
+        }
+    }
+    display: flex;
+    justify-content: space-between;
+    .ul {
+        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        align-content: center;
+        justify-items: center;
+        margin-left: 45px;
+        height: 100%;
+        li {
+            color: hsl(219, 9%, 45%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            list-style: none;
+            height: 90px;
+            min-width: 80px;
+            border-bottom: 2px solid rgba(255, 166, 0, 0);
+            font-size: 1.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            &:hover {
+                font-weight: 700;
+                border-bottom: 2px solid $pimary;
+            }
+        }
+    }
+}
