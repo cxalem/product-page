@@ -3,10 +3,19 @@ import Image from "next/image";
 import { Gallery } from "../components/Gallery/Gallery";
 import { Header } from "../components/Header/Header";
 import styles from "../styles/Home.module.css";
-import { dbConnect } from '@lib/dbConnect'
+import { dbConnect } from "@lib/dbConnect";
 import Product from "@models/Product";
+import React, { useState, useEffect } from "react";
 
-export default function Home() {
+export default function Home({ products }) {
+  const [images, setImages] = useState([])
+  useEffect(() => {
+    products.map((product) => {
+      const imgs = product.images;
+      setImages(imgs);
+    })
+  }, [])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -18,8 +27,12 @@ export default function Home() {
 
       <main className={styles.main}>
         <div className={styles.productContainer}>
-          <Gallery />
+          <Gallery 
+            images={images}
+            products={products}
+          />
         </div>
+        <h1>Product Info</h1>
       </main>
 
       <footer className={styles.footer}></footer>
@@ -29,12 +42,17 @@ export default function Home() {
 
 export async function getServerSideProps() {
   try {
-    await dbConnect()
-    const res = await Product.find({})
-    console.log(res)
+    await dbConnect();
+    const res = await Product.find({});
 
-    return {props: {product: 123}}
+    const products = res.map((item) => {
+      const product = item.toObject();
+      product._id = `${product._id}`;
+      return product;
+    });
+
+    return { props: { products } };
   } catch (error) {
-    console.log(error)    
+    console.log(error);
   }
 }
