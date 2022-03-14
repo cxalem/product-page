@@ -1,0 +1,101 @@
+$primary-color: rgb(255, 125, 26);
+$title-color: rgba(0, 0, 0, 0.85);
+
+@mixin addToCartBtn() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  column-gap: 10px;
+  width: 60%;
+  border-width: 0;
+  color: white;
+  font-weight: 600;
+  background: $primary-color;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(255, 125, 26, 0.4);
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 20px;
+  padding: 30px;
+  .infoHeader {
+    display: flex;
+    flex-direction: column;
+    .company {
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+      color: $primary-color;
+      margin-bottom: 10px;
+    }
+    .title {
+      color: $title-color;
+      font-size: 3.6rem;
+      font-weight: 700;
+      line-height: 40px;
+    }
+  }
+  p.description {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.5);
+    line-height: 23px;
+  }
+  .priceContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    .discount {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: $title-color;
+    }
+    .price {
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-decoration: line-through;
+      color: rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .addToCartContainer {
+    column-gap: 20px;
+    display: flex;
+    justify-content: space-between;
+    .quatityCotnainer {
+      border-radius: 10px;
+      width: 40%;
+      height: 45px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.03);
+      .minus, .plus {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+      }
+    }
+    .addToCartBtn {
+      @include addToCartBtn();
+      &:hover {
+        opacity: 60%;
+        transition: ease-in-out 0.1s;
+      }
+    }
+    .disabled {
+      @include addToCartBtn();
+      cursor: not-allowed;
+      opacity: 60%;
+    }
+  }
+}

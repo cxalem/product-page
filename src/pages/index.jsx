@@ -7,12 +7,12 @@ import { dbConnect } from "@lib/dbConnect";
 import Product from "@models/Product";
 import React, { useState, useEffect } from "react";
 import { GalleryContext } from "components/GalleryContext/GalleryContext";
+import { ProductInfo } from "components/ProductInfo/ProductInfo";
 
 export default function Home({ products }) {
   const [images, setImages] = useState([]);
   const firstImg = products[0].images[0].full;
 
-  
   useEffect(() => {
     products.map((product) => {
       const imgs = product.images;
@@ -20,7 +20,6 @@ export default function Home({ products }) {
     });
   }, [products]);
 
-  
   return (
     <div className={styles.container}>
       <Head>
@@ -32,13 +31,9 @@ export default function Home({ products }) {
 
       <main className={styles.main}>
         <div className={styles.productContainer}>
-          <Gallery 
-          images={images} 
-          products={products}
-          firstImg={firstImg}
-          />
+          <Gallery images={images} products={products} firstImg={firstImg} />
         </div>
-        <h1>Product Info</h1>
+        <ProductInfo products={products} />
       </main>
 
       <footer className={styles.footer}></footer>

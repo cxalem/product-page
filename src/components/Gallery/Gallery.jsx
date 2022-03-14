@@ -9,12 +9,12 @@ const Gallery = ({ images, firstImg }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      thumb.current.firstChild.classList.add(`${galleryStyles.active}`)
-    }, .005)
-  }, [])
+      thumb.current.firstChild.classList.add(`${galleryStyles.active}`);
+    }, 0.005);
+  }, []);
 
   const onClickActive = (e) => {
-    e.target.classList.add(`${galleryStyles.active}`)
+    e.target.classList.add(`${galleryStyles.active}`);
     if (e.target.src) {
       setActive(e.target.src);
     } else {
@@ -25,12 +25,18 @@ const Gallery = ({ images, firstImg }) => {
   return (
     <div className={galleryStyles.galleryContainer}>
       <div className={galleryStyles.slider}>
-        <img key={uuidv4()} src={`${active}`} alt="product" />;
+        <img key={uuidv4()} src={`${active}`} alt="product" />
       </div>
-      <div ref={thumb} className={galleryStyles.thumbContainer} >
+      <div ref={thumb} className={galleryStyles.thumbContainer}>
         {images.map((image) => {
           return (
-            <img key={uuidv4()} onClick={onClickActive} src={`${image.full}`} className={`${galleryStyles.thumb}`} alt="thumb" />
+            <img
+              key={uuidv4()}
+              onClick={onClickActive}
+              src={`${image.full}`}
+              className={`${galleryStyles.thumb}`}
+              alt="thumb"
+            />
           );
         })}
       </div>

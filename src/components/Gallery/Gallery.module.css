@@ -11,7 +11,7 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  overflow: hidden;
+  padding: 30px;
 }
 
 .galleryContainer .slider {
@@ -21,7 +21,7 @@
 }
 
 .galleryContainer .slider img {
-  max-width: 400px;
+  max-width: 340px;
   border-radius: 15px;
 }
 
