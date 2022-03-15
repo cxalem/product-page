@@ -10,12 +10,12 @@ const Gallery = ({ images, firstImg }) => {
   useEffect(() => {
     setTimeout(() => {
       thumb.current.firstChild.classList.add(`${galleryStyles.active}`);
-    }, 0.005);
+    });
   }, []);
 
   const onClickActive = (e) => {
     e.target.classList.add(`${galleryStyles.active}`);
-    if (e.target.src) {
+    if (e.target.src) { 
       setActive(e.target.src);
     } else {
       return;

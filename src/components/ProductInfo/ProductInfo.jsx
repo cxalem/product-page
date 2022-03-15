@@ -1,3 +1,4 @@
+import { CartModal } from "components/CartModal/CartModal";
 import React, { useRef, useState } from "react";
 import { Cart } from "SVGComponents/Cart";
 import { Minus } from "SVGComponents/Minus";
@@ -5,25 +6,19 @@ import { Plus } from "SVGComponents/Plus";
 import infoStyles from "./ProductInfo.module.css";
 
 const ProductInfo = ({ products }) => {
-  const [items, setItems] = useState(0);
-  const plus = useRef();
-  const minus = useRef();
+  const [quantity, setQuantity] = useState(0);
+  const [cartItems, setCartItems] = useState([]);
+  let items = [];
 
-  const itemQuantity = (e) => {
-    if (e.target === minus.current){
-      if(items > 0) {
-        setItems(items - 1);
-      }
-    } else if (e.target === plus.current) {
-      setItems(items + 1);
+  const minus = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
     }
   };
 
-  const btnClick = () => {
-    if (items !=0 ){
-    console.log('click')
-  } else {return}
-  }
+  const plus = () => {
+    setQuantity(quantity + 1);
+  };
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat("en-EN", {
@@ -35,6 +30,22 @@ const ProductInfo = ({ products }) => {
   return (
     <>
       {products.map((product) => {
+        const addToCart = () => {
+          if (quantity > 0) {
+            const newItem = [...items];
+            newItem.push({
+              title: product.title,
+              discount: product.discount,
+              price: product.price,
+              thumb: product.images[0].thumb,
+              _id: product._id,
+              quantity: quantity
+            });
+            setCartItems(newItem);
+          } else {
+            return;
+          }
+        };
         return (
           <div className={infoStyles.infoContainer} key={product._id}>
             <div className={infoStyles.infoHeader}>
@@ -54,20 +65,27 @@ const ProductInfo = ({ products }) => {
             </div>
 
             <div className={infoStyles.addToCartContainer}>
-              <div onClick={itemQuantity} className={infoStyles.quatityCotnainer}>
-                <div ref={minus} className={infoStyles.minus}>
+              <div className={infoStyles.quatityCotnainer}>
+                <div onClick={minus} className={infoStyles.minus}>
                   <Minus />
                 </div>
-                <span className={infoStyles.quantity}>{items}</span>
-                <div ref={plus} className={infoStyles.plus}>
+                <span className={infoStyles.quantity}>{quantity}</span>
+                <div onClick={plus} className={infoStyles.plus}>
                   <Plus />
                 </div>
               </div>
 
-              <button onClick={btnClick} className={items != 0 ? infoStyles.addToCartBtn : infoStyles.disabled}>
-                <Cart viewBox="0 0 25 20" width="20px" height="15px" fill="white" />Add to cart
+              <button
+                onClick={addToCart}
+                className={ quantity > 0 ? infoStyles.addToCartBtn : `${infoStyles.addToCartBtn} ${infoStyles
+                  .disabled}`
+                }
+              >
+                <Cart viewBox="0 0 25 20" width="20px" height="15px" fill="white" />
+                Add to cart
               </button>
             </div>
+            <CartModal formatPrice={formatPrice} cartItems={cartItems} />
           </div>
         );
       })}
