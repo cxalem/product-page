@@ -6,7 +6,6 @@ import styles from "../styles/Home.module.css";
 import { dbConnect } from "@lib/dbConnect";
 import Product from "@models/Product";
 import React, { useState, useEffect } from "react";
-import { GalleryContext } from "components/GalleryContext/GalleryContext";
 import { ProductInfo } from "components/ProductInfo/ProductInfo";
 
 export default function Home({ products }) {

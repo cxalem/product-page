@@ -1,12 +1,12 @@
-import { GalleryProvider } from "components/GalleryContext/GalleryContext";
+import { ProductProvider } from "components/ProductContext/ProductContext";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <GalleryProvider>
+      <ProductProvider>
         <Component {...pageProps} />
-      </GalleryProvider>
+      </ProductProvider>
     </>
   );
 }

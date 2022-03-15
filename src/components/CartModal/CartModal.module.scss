@@ -5,45 +5,62 @@ $primary-color: rgb(255, 125, 26);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     padding: 15px 20px;
+    max-width: 330px;
     display: flex;
     flex-direction: column;
     row-gap: 20px;
+    .empty {
+        color: $title-color;
+        text-align: center;
+        margin: 45px 0;
+        font-size: 1.5rem;
+    }
     .cart {
         padding: 15px 0;
         border-bottom: 1px solid rgba(0, 0, 0, 0.20);
         font-weight: 700;
         color: $title-color;
     }
-    .item {
+    .itemsContainer{
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .thumb {
-            width: 50px;
-            border-radius: 5px;
+        flex-direction: column;
+        row-gap: 20px;
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .delete {
+                cursor: pointer;
+            }
+            .thumb {
+                width: 50px;
+                border-radius: 5px;
+            }
+            .cartInfo {
+                width: 205px;
+                .cartTitle {
+                    color: rgba(0, 0, 0, 0.60);
+                    font-weight: 500;
+                }
+                .price {
+                    color: rgba(0, 0, 0, 0.60);
+                    font-weight: 500;
+                }
+                .total {
+                    font-weight: 700;
+                    color: $title-color;
+                }
+            }
         }
-        .cartInfo {
-            width: 205px;
-            .cartTitle {
-                color: rgba(0, 0, 0, 0.60);
-                font-weight: 500;
-            }
-            .price {
-                color: rgba(0, 0, 0, 0.60);
-                font-weight: 500;
-            }
-            .total {
-                font-weight: 700;
-                color: $title-color;
-            }
+        .checkout {
+            border-width: 0;
+            border-radius: 10px;
+            height: 45px;
+            color: white;
+            font-weight: 600;
+            background: $primary-color;
+            opacity: 50%;
+            cursor: not-allowed;
         }
-    }
-    .checkout {
-        border-width: 0;
-        border-radius: 10px;
-        height: 45px;
-        color: white;
-        font-weight: 600;
-        background: $primary-color;
     }
 }

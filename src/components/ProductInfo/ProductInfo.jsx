@@ -1,4 +1,5 @@
 import { CartModal } from "components/CartModal/CartModal";
+import { ProductContext } from "components/ProductContext/ProductContext";
 import React, { useRef, useState } from "react";
 import { Cart } from "SVGComponents/Cart";
 import { Minus } from "SVGComponents/Minus";
@@ -6,26 +7,7 @@ import { Plus } from "SVGComponents/Plus";
 import infoStyles from "./ProductInfo.module.css";
 
 const ProductInfo = ({ products }) => {
-  const [quantity, setQuantity] = useState(0);
-  const [cartItems, setCartItems] = useState([]);
-  let items = [];
-
-  const minus = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-    }
-  };
-
-  const plus = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat("en-EN", {
-      style: "currency",
-      currency: "USD",
-    }).format(price);
-  };
+  const { cartItems, setCartItems, onDelete, formatPrice, quantity, plus, minus, items } = React.useContext(ProductContext)
 
   return (
     <>
@@ -85,7 +67,7 @@ const ProductInfo = ({ products }) => {
                 Add to cart
               </button>
             </div>
-            <CartModal formatPrice={formatPrice} cartItems={cartItems} />
+            <CartModal formatPrice={formatPrice} cartItems={cartItems} onDelete={onDelete} />
           </div>
         );
       })}

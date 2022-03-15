@@ -5,7 +5,6 @@ import { Cart } from "SVGComponents/Cart";
 import headerStyles from "./Header.module.css";
 
 const Header = () => {
-  const LOCAL_URI = process.env.LOCAL_URI
   const myLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 75}`;
   };
