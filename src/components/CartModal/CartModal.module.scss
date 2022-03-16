@@ -2,10 +2,12 @@ $title-color: rgba(0, 0, 0, 0.85);
 $primary-color: rgb(255, 125, 26);
 
 .container {
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
+    background: white;
     padding: 15px 20px;
     max-width: 330px;
+    min-height: 215px;
     display: flex;
     flex-direction: column;
     row-gap: 20px;

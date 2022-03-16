@@ -12,7 +12,12 @@ $pimary: hsl(26, 100%, 55%);
     .icons {
         @include column();
         column-gap: 45px;
-        .cart {
+        .cartContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            position: relative;
             cursor: pointer;
         }
         .avatar {

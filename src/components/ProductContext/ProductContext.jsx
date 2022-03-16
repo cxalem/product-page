@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 const ProductContext = React.createContext();
 
 const ProductProvider = (props) => {
-  //Product Info
+
+//   ################### -- Product Info -- ###################
+
   const [quantity, setQuantity] = useState(0);
   const [cartItems, setCartItems] = useState([]);
   let items = [];
@@ -33,22 +35,13 @@ const ProductProvider = (props) => {
     setCartItems(newItem);
   };
 
-  const addToCart = (product) => {
-    if (quantity > 0) {
-      const newItem = [...items];
-      newItem.push({
-        title: product.title,
-        discount: product.discount,
-        price: product.price,
-        thumb: product.images[0].thumb,
-        _id: product._id,
-        quantity: quantity
-      });
-      setCartItems(newItem);
-    } else {
-      return;
-    }
-  };
+//   ################### -- End Product Info -- ###################
+
+const [openModal, setOpenModal] = useState(false);
+
+const onClickCart = () => {
+  setOpenModal(!openModal)
+}
 
   return (
     <ProductContext.Provider value={{
@@ -59,7 +52,11 @@ const ProductProvider = (props) => {
         setCartItems,
         plus,
         minus,
-        items
+        items,
+        openModal,
+        setOpenModal,
+        onClickCart,
+        setQuantity
     }}>
       {props.children}
     </ProductContext.Provider>

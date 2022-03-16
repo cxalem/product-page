@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
+import { CartModal } from "components/CartModal/CartModal";
 import { Gallery } from "../components/Gallery/Gallery";
 import { Header } from "../components/Header/Header";
 import styles from "../styles/Home.module.css";
@@ -7,8 +7,11 @@ import { dbConnect } from "@lib/dbConnect";
 import Product from "@models/Product";
 import React, { useState, useEffect } from "react";
 import { ProductInfo } from "components/ProductInfo/ProductInfo";
+import { ProductContext } from "components/ProductContext/ProductContext";
+import { CartPortal } from "components/CartPortal/CartPortal";
 
 export default function Home({ products }) {
+  const { onDelete, cartItems, formatPrice, setOpenModal, openModal } = React.useContext(ProductContext)
   const [images, setImages] = useState([]);
   const firstImg = products[0].images[0].full;
 
@@ -28,9 +31,15 @@ export default function Home({ products }) {
       </Head>
       <Header />
 
+      <CartPortal>
+        { !!openModal &&
+          <CartModal formatPrice={formatPrice} cartItems={cartItems} onDelete={onDelete} />
+        }
+      </CartPortal>
+
       <main className={styles.main}>
         <div className={styles.productContainer}>
-          <Gallery images={images} products={products} firstImg={firstImg} />
+          <Gallery images={images} firstImg={firstImg} />
         </div>
         <ProductInfo products={products} />
       </main>

@@ -3,11 +3,13 @@ import Image from "next/image";
 import { Logo } from "SVGComponents/Logo";
 import { Cart } from "SVGComponents/Cart";
 import headerStyles from "./Header.module.css";
+import { ProductContext } from "components/ProductContext/ProductContext";
 
 const Header = () => {
   const myLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 75}`;
   };
+  const { onClickCart } = React.useContext(ProductContext)
   return (
     <header>
       <nav className={headerStyles.Nav}>
@@ -23,7 +25,9 @@ const Header = () => {
         </div>
 
         <div className={headerStyles.icons}>
-          <Cart className={headerStyles.cart} />
+          <div onClick={onClickCart} className={headerStyles.cartContainer}>
+            <Cart className={headerStyles.cart} />
+          </div>
           <div className={headerStyles.avatar}>
             <Image
               loader={myLoader}

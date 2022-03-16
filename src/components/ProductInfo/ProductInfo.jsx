@@ -1,4 +1,3 @@
-import { CartModal } from "components/CartModal/CartModal";
 import { ProductContext } from "components/ProductContext/ProductContext";
 import React, { useRef, useState } from "react";
 import { Cart } from "SVGComponents/Cart";
@@ -7,11 +6,12 @@ import { Plus } from "SVGComponents/Plus";
 import infoStyles from "./ProductInfo.module.css";
 
 const ProductInfo = ({ products }) => {
-  const { cartItems, setCartItems, onDelete, formatPrice, quantity, plus, minus, items } = React.useContext(ProductContext)
+  const { setCartItems, formatPrice, quantity, plus, minus, items, setQuantity } = React.useContext(ProductContext)
 
   return (
     <>
       {products.map((product) => {
+        
         const addToCart = () => {
           if (quantity > 0) {
             const newItem = [...items];
@@ -24,10 +24,12 @@ const ProductInfo = ({ products }) => {
               quantity: quantity
             });
             setCartItems(newItem);
+            setQuantity(0)
           } else {
             return;
           }
         };
+
         return (
           <div className={infoStyles.infoContainer} key={product._id}>
             <div className={infoStyles.infoHeader}>
@@ -67,7 +69,6 @@ const ProductInfo = ({ products }) => {
                 Add to cart
               </button>
             </div>
-            <CartModal formatPrice={formatPrice} cartItems={cartItems} onDelete={onDelete} />
           </div>
         );
       })}
