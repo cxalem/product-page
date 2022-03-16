@@ -6,10 +6,11 @@ import headerStyles from "./Header.module.css";
 import { ProductContext } from "components/ProductContext/ProductContext";
 
 const Header = () => {
+  const { onClickCart, cartItems } = React.useContext(ProductContext)
+
   const myLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 75}`;
   };
-  const { onClickCart } = React.useContext(ProductContext)
   return (
     <header>
       <nav className={headerStyles.Nav}>
@@ -26,6 +27,7 @@ const Header = () => {
 
         <div className={headerStyles.icons}>
           <div onClick={onClickCart} className={headerStyles.cartContainer}>
+            {cartItems.length > 0 && <span className={headerStyles.cartQuantity}>{cartItems.length}</span>}
             <Cart className={headerStyles.cart} />
           </div>
           <div className={headerStyles.avatar}>

@@ -7,14 +7,7 @@ const Gallery = ({ images, firstImg }) => {
   const [active, setActive] = useState(firstImg);
   const thumb = useRef();
 
-  useEffect(() => {
-    setTimeout(() => {
-      thumb.current.firstChild.classList.add(`${galleryStyles.active}`);
-    });
-  }, []);
-
   const onClickActive = (e) => {
-    e.target.classList.add(`${galleryStyles.active}`);
     if (e.target.src) {
       setActive(e.target.src);
     } else {
